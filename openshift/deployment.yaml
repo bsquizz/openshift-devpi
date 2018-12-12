@@ -37,7 +37,10 @@ spec:
             - name: DEVPI_MIRROR_CACHE_EXPIRY
               value: '86400'
             - name: DEVPI_PASSWORD
-              value: ''
+              valueFrom:
+                secretKeyRef:
+                  key: pw
+                  name: devpi-secrets
           resources:
             limits:
               cpu: 500m
@@ -72,7 +75,7 @@ spec:
       terminationGracePeriodSeconds: 30
       dnsPolicy: ClusterFirst
       securityContext:
-      # Change this if you want to bind a persistent volume claim
       volumes:
         - name: devpi-data
-          emptyDir:
+          persistentVolumeClaim:
+            claimName: devpi-pvc

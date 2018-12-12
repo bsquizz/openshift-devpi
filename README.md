@@ -17,6 +17,7 @@ to be used on OpenShift by running as a non-priviledged user.
 
     oc login https://<your-master-node>:8443
     oc new-project devpi
+    oc create -f openshift/pvc.yaml
     oc create -f openshift/deployment.yaml
     oc create -f openshift/service.yaml
 
